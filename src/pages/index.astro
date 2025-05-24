@@ -1,16 +1,208 @@
 ---
 import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
+
+import Banner from '../components/Banner.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+const ownerprojects = [
+  {
+    title: 'Proyecto 1: Desarrollo de sistema de Gestion para el consorcio Compured',
+    description: 'Desarrollo de una aplicación web full-stack para la integracion con la plataforma de Peru Compras, utilice webscraping y optimice el rendimiento permitiendo optimizar las ventas y gestiones comerciales.',
+    imageUrl: '/img/perucompras.jpg',
+    projectLink: 'https://github.com/AndersonBH16/sistema-gestion-cr',
+  },
+  {
+    title: 'Proyecto 2: Desarrollo de plataforma para Clinica dental Quevedo',
+    description: 'Creación de una aplicacion web para la Clinica Dental Quevedo permitiendo crear historiales clínicos, gestión de pacientes, agendar citas médicas, gestión de tratamientos, permitir push notifications y siendo el manejo de Odontograma el plus más grande. ',
+    imageUrl: '/img/quevedodental.jpg',
+    projectLink: 'https://github.com/AndersonBH16/app-dental',
+  },
+  {
+    title: 'Proyecto 3: Desarrollo de sistema comercial para la empresa redcom',
+    description: 'Construcción de una aplicación web interactiva para la visualización de métricas de ventas utilizando librerías de gráficos avanzadas',
+    imageUrl: '/img/redcom.jpeg',
+    projectLink: 'https://github.com/tu-usuario/proyecto3',
+  },
+  {
+    title: 'Proyecto 4: Sistema para restaurante',
+    description: 'Implementación de un sistema robusto para pedidos, gestión de mesas, restaurantes y caja sin facturación electrónica.(primera versión)',
+    imageUrl: '/img/restaurante.webp',
+    projectLink: 'https://github.com/AndersonBH16/porton-azul-repo',
+  },
+  {
+    title: 'Proyecto 5: Sistema académico para Postgrado - UNT',
+    description: 'Mantenimiento de sistema académico para gestión de pagos y matrículas utilizando gráficos, bases de datos SQL que permite el seguimiento de los procesos de matrícula y notas',
+    imageUrl: '/img/postgrado.jpg',
+    projectLink: '#',
+  },
+];
+
+const enterpriseprojects = [
+  {
+    title: 'Softonic: Desarrollo y mantenimiento de sistemas empresariales',
+    description: 'Desarrollo y mantenimiento de los sistemas de la empresa internacional Softonic. Desarrollo de features nuevos y mantenimiento de los diversos sistemas optimizando los scripts y uso de comandos bash para mejora de procesos empresariales',
+    imageUrl: '/img/tonic.png',
+  },
+  {
+    title: 'Desarrollo y mantenimiento de la plataforma Jemstep de Citibank',
+    description: 'Creación de una aplicacion web para la Clinica Dental Quevedo permitiendo crear historiales clínicos, gestión de pacientes, agendar citas médicas, gestión de tratamientos, permitir push notifications y siendo el manejo de Odontograma el plus más grande. ',
+    imageUrl: '/img/quevedodental.jpg',
+    projectLink: 'https://github.com/AndersonBH16/app-dental',
+  },
+  {
+    title: 'Itereo',
+    description: 'Diseño, desarrollo y mantenimiento de la paltaforma itereo para gestión comercial y turística',
+    imageUrl: '/img/iter.jpeg',
+    projectLink: 'https://github.com/AndersonBH16/itereo-api',
+  },
+  {
+    title: 'Desarrollo de sistemas administrativos y académicos',
+    description: 'Diseño, Desarrollo e implementación de sistemas académicos y administrativos para la Universidad Nacional de Trujillo como Sistemas de planillas, de bibliotecas, papeletas, gestión de notas y trámite documentarios',
+    imageUrl: '/img/unt.jpg',
+  },
+  {
+    title: 'Redteam Software: Software para constructoras',
+    description: 'Mantenimiento de un software para empresas constructoras de USA orientado a la planificacion y gestion de personal y comercial. Utilizando diversos gráficos para mostrar información correspondiente',
+    imageUrl: '/img/redteam.jpg',
+  },
+  {
+    title: 'Imagina Technologies: Plataforma de Ecosac',
+    description: 'Diseño, desarrollo y mantenimiento de su sistema para gestión de personal orientado a Recursos Humanos. Permite el control y monitoreo del personal, incluyendo viáticos y procesos de control de personal.',
+    imageUrl: '/img/ecosac.jpg',
+  },
+];
 ---
 
-<Layout>
+<Layout title="Portafolio de Anderson Blas">
+  <Banner name="Anderson Blas" backgroundImage="/img/dev2.jpg" />
 
-<Header title="Bienvenido a mi sitio" />
-<p>Contenido principal...</p>
+  <div class="presentation">
+    <p>
+      Soy ingeniero de software con más de 5 años de experiencia en desarrollo web, 
+      desarrollando soluciones en distintas áreas y sectores. Soy un profesional proactivo 
+      y orientado a resultados, brindando soluciones eficientes y aportando valor en cada 
+      proyecto en el que he trabajado. Tengo conocimientos en múltiples tecnologías backend 
+      y frontend. Me gusta trabajar en equipo.
+    </p>
+  </div>
 
-	<Welcome />
+
+  <main class="container">
+    <section class="projects-section">
+      <h3>Proyectos Personales como Consultor</h3>
+      <br>
+      <div class="projects-grid">
+        {ownerprojects.map(project => (
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            imageUrl={project.imageUrl}
+            projectLink={project.projectLink}
+          />
+        ))}
+      </div>
+    </section>
+    <br>
+    <section class="work-projects-section">
+      <h3>Proyectos de experiencia Laboral</h2>
+      <br>
+      <div class="projects-grid">
+        {enterpriseprojects.map(project => (
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            imageUrl={project.imageUrl}
+            projectLink={project.projectLink}
+          />
+        ))}
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  body{
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    align-items: center;
+  }
+
+  .presentation {
+    margin-left: 35%;
+    margin-top: 5%;
+    background-color: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .presentation h3 {
+    margin-bottom: 1rem;
+    color: #1f2937;
+  }
+
+  .presentation p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4b5563;
+  }
+
+  .projects-section {
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  .projects-section h3 {
+    margin-bottom: 40px;
+    color: #333;
+  }
+
+  .work-projects-section{
+    padding: 40px 0;
+    text-align: center;
+  }
+
+  .work projects-section h3 {
+    margin-bottom: 40px;
+    color: #333;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .main-banner {
+      height: 300px;
+    }
+    .main-banner h1 {
+      font-size: 2.5em;
+    }
+    .projects-section h2 {
+      font-size: 2em;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .main-banner {
+      height: 250px;
+    }
+    .main-banner h1 {
+      font-size: 2em;
+    }
+    .container {
+      padding: 15px;
+    }
+  }
+</style>
