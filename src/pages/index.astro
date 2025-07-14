@@ -78,7 +78,6 @@ const enterpriseprojects = [
 
 <Layout title="Portafolio de Anderson Blas">
   <Banner name="Anderson Blas" backgroundImage="/img/dev2.jpg" />
-
   <div class="presentation">
     <p>
       Soy ingeniero de software con más de 5 años de experiencia en desarrollo web, 
@@ -130,18 +129,19 @@ const enterpriseprojects = [
   }
 
   .presentation {
-    margin-left: 35%;
-    margin-top: 5%;
-    background-color: #f3f4f6;
+    margin: 5% auto 0 auto; /* margen superior y centrado horizontal */
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     max-width: 600px;
-    background-color: #ffffff;
     padding: 2rem;
     border-radius: 1rem;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     text-align: center;
+    flex-direction: column; /* por si agregas más contenido */
+    width: 90%; /* ocupa el 90% del ancho en pantallas pequeñas */
   }
+
 
   .presentation h3 {
     margin-bottom: 1rem;
