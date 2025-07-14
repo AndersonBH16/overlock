@@ -3,26 +3,22 @@ interface Props {
   name: string;
   backgroundImage: string;
 }
-
 const { name, backgroundImage } = Astro.props;
-
 const personalInfo = [
   "Desarrollador de software",
   "Consultoría de TI",
   "Amante del fútbol y música"
 ];
 ---
-
 <header class="main-banner" style={`background-image: url(${backgroundImage});`}>
   <div class="banner-overlay"></div>
   <div class="banner-content">
     <!-- Primera línea "H O L A" -->
     <div class="greeting">
-      <div class="bg-sky-900"></div>
-      <span>H</span>
-      <span>O</span>
-      <span>L</span>
-      <span>A</span>
+      <span style="animation-delay: 0.1s">H</span>
+      <span style="animation-delay: 0.2s">O</span>
+      <span style="animation-delay: 0.3s">L</span>
+      <span style="animation-delay: 0.4s">A</span>
     </div>
     
     <!-- Nombre principal -->
@@ -31,7 +27,7 @@ const personalInfo = [
     <!-- Lista horizontal de habilidades -->
     <div class="skills-list">
       {personalInfo.map((item, index) => (
-        <span class="skill-item">
+        <span class="skill-item" style={`animation-delay: ${1.2 + index * 0.2}s`}>
           {index > 0 && <span class="list-disc">•</span>}
           {item}
         </span>
@@ -54,6 +50,16 @@ const personalInfo = [
     text-align: center;
     overflow: hidden;
     color: white;
+    animation: backgroundZoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes backgroundZoom {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.05);
+    }
   }
 
   .banner-overlay {
@@ -64,6 +70,16 @@ const personalInfo = [
     height: 100%;
     background-color: rgba(0, 0, 0, 0.8);
     z-index: 1;
+    animation: fadeIn 1s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   .banner-content {
@@ -71,6 +87,18 @@ const personalInfo = [
     z-index: 2;
     width: 90%;
     max-width: 1200px;
+    animation: slideUpFade 1s ease-out;
+  }
+
+  @keyframes slideUpFade {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .greeting {
@@ -85,6 +113,22 @@ const personalInfo = [
 
   .greeting span {
     display: inline-block;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: letterDrop 0.6s ease-out forwards;
+    transition: transform 0.3s ease;
+  }
+
+  .greeting span:hover {
+    transform: translateY(-5px) scale(1.1);
+    text-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+  }
+
+  @keyframes letterDrop {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .main-banner h1 {
@@ -93,6 +137,15 @@ const personalInfo = [
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     font-weight: 700;
     letter-spacing: 0.2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpFade 0.8s ease-out 0.8s forwards;
+    transition: transform 0.3s ease, text-shadow 0.3s ease;
+  }
+
+  .main-banner h1:hover {
+    transform: translateY(-2px);
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.8);
   }
 
   .skills-list {
@@ -107,11 +160,66 @@ const personalInfo = [
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpFade 0.6s ease-out forwards;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .bullet-pointer {
+  .skill-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .skill-item:hover {
+    transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .skill-item:hover::before {
+    left: 100%;
+  }
+
+  .list-disc {
     font-weight: bold;
     color: rgba(255, 255, 255, 0.9);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+  }
+
+  /* Efecto de parallax sutil en el contenido */
+  .banner-content {
+    animation: gentleFloat 6s ease-in-out infinite;
+  }
+
+  @keyframes gentleFloat {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 
   @media (max-width: 768px) {
@@ -127,6 +235,26 @@ const personalInfo = [
     
     .skill-item {
       gap: 0.75rem;
+    }
+
+    .greeting {
+      font-size: 1.5rem;
+      gap: 0.5rem;
+    }
+
+    /* Reducir la intensidad de las animaciones en móviles */
+    @media (prefers-reduced-motion: reduce) {
+      .main-banner,
+      .banner-content,
+      .greeting span,
+      .skill-item {
+        animation: none;
+      }
+      
+      .main-banner h1 {
+        opacity: 1;
+        transform: none;
+      }
     }
   }
 </style>
